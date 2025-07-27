@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment QR - Dana | OVO | GoPay</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-image: url('https://images.unsplash.com/photo-1542224566-0d36f1e7e132'); /* Ganti URL ini */
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: rgba(0,0,0,0.7);
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 400px;
+      margin: auto;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .payment-option {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      color: white;
+    }
+
+    .dana { background-color: #1DA1F2; }
+    .ovo { background-color: #7F00FF; }
+    .gopay { background-color: #00B8D4; }
+
+    .payment-info {
+      display: none;
+      margin-top: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .copy-btn {
+      background-color: #28a745;
+      width: 100%;
+    }
+
+    .qr-img {
+      margin-top: 10px;
+      width: 150px;
+      height: 150px;
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Metode Pembayaran</h1>
+
+    <div class="payment-option">
+      <button class="dana" onclick="showPayment('dana')">Dana</button>
+      <button class="ovo" onclick="showPayment('ovo')">OVO</button>
+      <button class="gopay" onclick="showPayment('gopay')">GoPay</button>
+    </div>
+
+    <div id="payment-dana" class="payment-info">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Logo_dana_blue.png" class="qr-img" alt="QR Dana">
+      <input type="text" id="dana-number" value="081234567890" readonly />
+      <button class="copy-btn" onclick="copyToClipboard('dana-number')">Salin Nomor Dana</button>
+    </div>
+
+    <div id="payment-ovo" class="payment-info">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/OVO_logo.png" class="qr-img" alt="QR OVO">
+      <input type="text" id="ovo-number" value="081234567891" readonly />
+      <button class="copy-btn" onclick="copyToClipboard('ovo-number')">Salin Nomor OVO</button>
+    </div>
+
+    <div id="payment-gopay" class="payment-info">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Logo_GoPay.png" class="qr-img" alt="QR GoPay">
+      <input type="text" id="gopay-number" value="081234567892" readonly />
+      <button class="copy-btn" onclick="copyToClipboard('gopay-number')">Salin Nomor GoPay</button>
+    </div>
+  </div>
+
+  <script>
+    function showPayment(method) {
+      document.querySelectorAll('.payment-info').forEach(el => el.style.display = 'none');
+      document.getElementById('payment-' + method).style.display = 'block';
+    }
+
+    function copyToClipboard(id) {
+      const input = document.getElementById(id);
+      input.select();
+      input.setSelectionRange(0, 99999); // mobile
+      document.execCommand("copy");
+      alert("Nomor berhasil disalin: " + input.value);
+    }
+  </script>
+
+</body>
+</html>
